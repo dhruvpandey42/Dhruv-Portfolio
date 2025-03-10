@@ -14,9 +14,37 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleModeBtn.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
     });
 
-    // Initialize Animations
-    AOS.init({ duration: 1200 });
+    // Typing Effect
+    const text = "Network Engineer | Cybersecurity | Cloud Enthusiast";
+    let index = 0;
+    function typeEffect() {
+        document.getElementById("typing-text").innerText = text.slice(0, index);
+        index++;
+        if (index <= text.length) {
+            setTimeout(typeEffect, 100);
+        }
+    }
+    typeEffect();
 
-    // Load Particles.js Animation
-    particlesJS.load("particles-js", "libs/particles.json");
+    // Scroll Indicator
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.scrollY;
+        let docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        let scrollPercent = (scrollTop / docHeight) * 100;
+        document.getElementById("scroll-progress").style.width = scrollPercent + "%";
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 500) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 });
